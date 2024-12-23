@@ -5,14 +5,16 @@ class Controls {
         this.left = false;
         this.right = false;
 
-        this.spaceHit = false;
+        this.action = false;
 
         this.joystick = nipplejs.create({
             zone: document.getElementById('joystick-container'),
             mode: 'static',
             position: { left: '100px', bottom: '40px' },
-            color: 'white'
+            color: 'white',
         });
+
+        this.actionButton = document.getElementById('actionButton');
 
         this.#addKeyboardControls();
 
@@ -33,11 +35,18 @@ class Controls {
             }
         });
 
-        this.joystick.on('end', ()=> {
+        this.joystick.on('end', () => {
             this.up = false;
             this.down = false;
             this.left = false;
             this.right = false;
+        })
+
+        this.actionButton.addEventListener('pointerdown', (e) => {
+            this.action = true;
+        })
+        this.actionButton.addEventListener('pointerup', (e) => {
+            this.action = false;
         })
     }
 
@@ -59,7 +68,7 @@ class Controls {
                     this.right = true;
                     break;
                 case 'Space':
-                    this.spaceHit = true;
+                    this.action = true;
                     break;
                 default:
                     break;
@@ -82,7 +91,7 @@ class Controls {
                     this.right = false;
                     break;
                 case 'Space':
-                    this.spaceHit = false;
+                    this.action = false;
                     break;
                 default:
                     break;

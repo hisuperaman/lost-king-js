@@ -16,6 +16,8 @@
 
             display: flex;
             justify-content: center;
+
+            user-select: none;
         }
 
         #myCanvas {
@@ -82,6 +84,21 @@
             }
         }
 
+        #actionButton {
+            all: unset;
+            position: absolute;
+            right: 120px;
+            bottom: 40px;
+            background-color: rgba(161, 161, 161, 0.8);
+            width: 4rem;
+            height: 4rem;
+            text-align: center;
+            border-radius: 100%;
+        }
+
+        #actionButton:active {
+            filter: brightness(110%);
+        }
 
         @media screen and (max-width: 1000px) {
             #myCanvas {
@@ -103,6 +120,8 @@
     <div id="joystick-container"></div>
     <div id="landscape-warning">Please switch to landscape mode for the best experience.</div>
 
+    <button id="actionButton">A</button>
+
     <script>
         function isTouchable() {
             return (
@@ -115,10 +134,15 @@
 
         function checkOrientation() {
             const joystickContainer = document.getElementById('joystick-container');
+            const actionButton = document.getElementById('actionButton');
+
             const safeArea = window.visualViewport.height - document.documentElement.clientHeight;
             // this 30 is the bottom of joystickContainer
             const bottom = 30 - safeArea
             joystickContainer.style.bottom = `${bottom}px`;
+
+            const actionButtonBottom = 40 - safeArea
+            actionButton.style.bottom = `${actionButtonBottom}px`;
 
             if (!isTouchable()) {
                 joystickContainer.style.display = 'none';
@@ -142,6 +166,8 @@
     <script src="index.js"></script>
     <script src="utils.js"></script>
     <script src="Sprite.js"></script>
+    <script src="Note.js"></script>
+    <script src="NoteScreen.js"></script>
     <script src="CollisionBlock.js"></script>
     <script src="data/collisions.js"></script>
     <script src="Game.js"></script>
