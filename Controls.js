@@ -15,6 +15,7 @@ class Controls {
         });
 
         this.actionButton = document.getElementById('actionButton');
+        this.jumpButton = document.getElementById('jumpButton');
 
         this.#addKeyboardControls();
 
@@ -24,7 +25,7 @@ class Controls {
     #addTouchControls() {
         this.joystick.on('move', (evt, data) => {
             if (data.direction) {
-                if (data.direction.angle === 'up') this.up = true;
+                if (data.direction.angle === 'up') null;
                 else this.up = false;
                 if (data.direction.angle === 'down') this.down = true;
                 else this.down = false;
@@ -47,6 +48,12 @@ class Controls {
         })
         this.actionButton.addEventListener('pointerup', (e) => {
             this.action = false;
+        })
+        this.jumpButton.addEventListener('pointerdown', (e) => {
+            this.up = true;
+        })
+        this.jumpButton.addEventListener('pointerup', (e) => {
+            this.up = false;
         })
     }
 
